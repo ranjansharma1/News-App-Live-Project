@@ -288,67 +288,102 @@ export class News extends Component {
   //         },
   //       ];
 
-  constructor() {
-    super();
-    console.log("constructor called");
+    // program to convert first letter of a string to uppercase
+
+    capitalizeFirstLetter(str) {
+        // converting first letter to uppercase
+        const capitalized = str.charAt(0).toUpperCase() + str.slice(1);
+        return capitalized;
+    }
+
+  constructor(props) {
+    super(props);
+    // console.log("constructor called");
     this.state = {
       articles: [],
       loading: false,
       page: 1
     };
+    document.title=`${this.capitalizeFirstLetter(this.props.category)} -News article`;
   }
-  async componentDidMount() {
-    console.log("componentDidMount called");
-    let url =
-      `https://newsapi.org/v2/top-headlines?country=in&country=${this.props.country}&category=${this.props.category}&apiKey=9917caab31c744788fe51800d0eec9e8&category=sports&pageSize=${this.props.pageSize}`;
+
+  //Creating a function that will reduce repetetive task;
+  async updateNews(){
+    const url =
+        `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&pageSize=${this.props.pageSize}&apiKey=5a5ab15878d846b58350687ed70f1841&page=${this.state.page}`;
     this.setState({loading:true})
     let data = await fetch(url);
     let parseData = await data.json();
-    console.log(parseData);
+    // console.log(parseData);
     this.setState({
-      articles: parseData.articles,
-      totalResults: parseData.totalResults,
-      loading:false
+        articles: parseData.articles,
+        totalResults: parseData.totalResults,
+        loading:false
     });
   }
 
+  //It will run after the component output has been rendered to the DOM
+  async componentDidMount() {
+    // console.log("componentDidMount called");
+    this.updateNews();
+    //updating this with updateNews functionality
+    // let url =
+    // `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=5a5ab15878d846b58350687ed70f1841&page=${this.state.page}pageSize=${this.props.pageSize}`;
+    // this.setState({loading:true})
+    // let data = await fetch(url);
+    // let parseData = await data.json();
+    // console.log(parseData);
+    // this.setState({
+    //   articles: parseData.articles,
+    //   totalResults: parseData.totalResults,
+    //   loading:false
+    // });
+  
+}
+
   handlePrev = async () => {
-    console.log("handle prev button clicked");
-    let url = `https://newsapi.org/v2/top-headlines?country=in&country=${this.props.country}&category=${this.props.category}&apiKey=9917caab31c744788fe51800d0eec9e8&category=sports&page=${
-      this.state.page - 1
-    }&pageSize=${this.props.pageSize}`;
-    this.setState({loading:true})
-    let data = await fetch(url);
-    let parseData = await data.json();
-    console.log(parseData);
-    this.setState({
-      page: this.state.page - 1,
-      articles: parseData.articles,
-      loading:false
-    });
-  };
+    // console.log("handle prev button clicked");
+    this.setState({page:this.state.page - 1});
+    this.updateNews();
+
+    //updating this with updateNews functionality
+    // let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=5a5ab15878d846b58350687ed70f1841&page=${this.state.page}pageSize=${this.props.pageSize}`;
+    // this.setState({loading:true})
+    // let data = await fetch(url);
+    // let parseData = await data.json();
+    // console.log(parseData);
+    // this.setState({
+    //   page: this.state.page - 1,
+    //   articles: parseData.articles,
+    //   loading:false
+    // });
+  
+};
+
   handleNext = async () => {
-    console.log("handle next button clicked");
-    if (!(this.state.page + 1 > Math.ceil(this.state.totalResults / 21))) {
-      let url = `https://newsapi.org/v2/top-headlines?country=in&country=${this.props.country}&category=${this.props.category}&apiKey=9917caab31c744788fe51800d0eec9e8&category=sports&page=${
-        this.state.page + 1
-      }&pageSize=${this.props.pageSize}`;
-      this.setState({loading:true})
-      let data = await fetch(url);
-      let parseData = await data.json();
-      console.log(parseData);
-      this.setState({
-        page: this.state.page + 1,
-        articles: parseData.articles,
-        loading:false
-      });
-    }
+    // console.log("handle next button clicked");
+    this.setState({page:this.state.page + 1});
+    this.updateNews();
+
+    //updating this with updateNews functionality
+    // if (!(this.state.page + 1 > Math.ceil(this.state.totalResults / 21))) {
+    //   let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=5a5ab15878d846b58350687ed70f1841&page=${this.state.page}pageSize=${this.props.pageSize}`;
+    //   this.setState({loading:true})
+    //   let data = await fetch(url);
+    //   let parseData = await data.json();
+    //   console.log(parseData);
+    //   this.setState({
+    //     page: this.state.page + 1,
+    //     articles: parseData.articles,
+    //     loading:false
+    //   });
+    // }
   };
   render() {
-    console.log( "country: "+ this.props.country +",category: " + this.props.category+ " totalResults: " +this.state.totalResults)
+    // console.log( "country: "+ this.props.country +",category: " + this.props.category+ " totalResults: " +this.state.totalResults)
     return (
       <div className="container my-3">
-        <h1 className="text-center text-primary">News App- Top Headlines</h1>
+        <h1 className="text-center text-primary"> Top Headlines - {this.capitalizeFirstLetter(this.props.category)}</h1>
         {this.state.loading && <Spinner/>}
         {!this.state.loading && <div className="row my-3">
           {this.state.articles.map((elem) => {
@@ -356,13 +391,12 @@ export class News extends Component {
               <div className="col-md-4" key={elem.url}>
                 <NewsItem
                   title={elem.title.slice(0, 50)}
-                  description={
-                    !elem.description
-                      ? elem.description
-                      : elem.description.slice(0, 150)
-                  }
+                  description={!elem.description  ? elem.description  : elem.description.slice(0, 150)}
                   imageUrl={elem.urlToImage}
                   newsUrl={elem.url}
+                  author={!elem.author?"Unknown":elem.author}
+                  publishedDate={elem.publishedAt}
+                  source={elem.source.name}
                 />
               </div>
             );
