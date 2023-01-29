@@ -68,3 +68,17 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+
+
+### Installing Infinite Scroll bar component
+
+command: `npm install --save react-infinite-scroll-component`
+This is used to scroll the content infinitely
+Link: https://www.npmjs.com/package/react-infinite-scroll-component
+
+
+### Installing React Top Loading bar
+Commmand: `npm i react-top-loading-bar`
+---This is used to load component
+Link : https://www.npmjs.com/package/react-top-loading-bar

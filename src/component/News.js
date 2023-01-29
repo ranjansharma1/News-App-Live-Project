@@ -38,17 +38,22 @@ export class News extends Component {
 
   //Creating a function that will reduce repetetive task;
   async updateNews(){
+    this.props.setProgress(10);
     const url =
         `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&pageSize=${this.props.pageSize}&apiKey=5a5ab15878d846b58350687ed70f1841&page=${this.state.page}`;
     this.setState({loading:true})
+    this.props.setProgress(20);
     let data = await fetch(url);
+    this.props.setProgress(40);
     let parseData = await data.json();
+    this.props.setProgress(70);
     // console.log(parseData);
     this.setState({
         articles: parseData.articles,
         totalResults: parseData.totalResults,
         loading:false
     });
+    this.props.setProgress(100);
   }
 
   //It will run after the component output has been rendered to the DOM
