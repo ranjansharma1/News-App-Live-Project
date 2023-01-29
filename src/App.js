@@ -20,16 +20,6 @@ export default function App() {
   const updatedProgress=(progress)=>{
     setProgress(progress);
   }
-  
-  // state={
-  //   progress:30
-  // }
-  // setProgress=(progress) => {
-  //   setState({
-  //     progress:progress
-  //   })
-  // }
-
 
     return (
       <div>

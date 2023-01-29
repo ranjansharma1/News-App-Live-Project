@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 const Navbar=()=>{
     return (
-      <nav className="navbar navbar-expand-lg bg-body-tertiary bg-warning">
+      <nav className="navbar fixed-top navbar-expand-lg bg-body-tertiary bg-warning">
         <div className="container-fluid">
           {/* Here I am replacing a --> Link and href --> to, reason to prevent loading, after doing this browser will not reload */}
           <Link className="navbar-brand" to="/">

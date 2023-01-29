@@ -5,9 +5,7 @@ import PropTypes from "prop-types"; //short impt
 import InfiniteScroll from "react-infinite-scroll-component";
 
 
-const News = (props) => {
-  document.title=`${capitalizeFirstLetter(props.category)} -News article`
-  
+const News = (props) => { 
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(1);
@@ -32,7 +30,11 @@ const News = (props) => {
 
   //It will run after the component output has been rendered to the DOM
   useEffect(() => {
+    document.title=`${capitalizeFirstLetter(props.category)} -News article`  
     updateNews();
+
+    // To disable warning messages for updateNews
+    //eslint-disable-next-line
   }, []);
 
   const fetchMoreData = async () => {
@@ -56,9 +58,8 @@ const News = (props) => {
   return (
     
     <div className="container my-3">
-      <h1 className="text-center text-primary">
-        {" "}
-        Top Headlines - {capitalizeFirstLetter(props.category)}{" "}
+      <h1 className="text-center text-primary" style={{marginTop :"70px"}}>
+        Top Headlines - {capitalizeFirstLetter(props.category)}
       </h1>
       {loading && <Spinner />}
       <InfiniteScroll
