@@ -57,19 +57,11 @@ export class News extends Component {
     this.updateNews();
 }
 
-  handlePrev = async () => {
-    this.setState({page:this.state.page - 1});
-    this.updateNews();
-};
-
-  handleNext = async () => {
-    this.setState({page:this.state.page + 1});
-    this.updateNews();
-  };
 
   fetchMoreData = async() => {
-   this.setState({page: this.state.page + 1});
-   const url =`https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&pageSize=${this.props.pageSize}&apiKey=5a5ab15878d846b58350687ed70f1841&page=${this.state.page}`;
+    this.setState({page:this.state.page + 1});
+   const url =`https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&pageSize=${this.props.pageSize}&apiKey=5a5ab15878d846b58350687ed70f1841&page=${this.state.page+1}`;
+   console.log("page: "+ this.state.page)
     this.setState({loading:true})
     let data = await fetch(url);
     let parseData = await data.json();
@@ -85,11 +77,10 @@ export class News extends Component {
     return (
       <div className="container my-3">
         <h1 className="text-center text-primary"> Top Headlines - {this.capitalizeFirstLetter(this.props.category)}</h1>
-        {/* {this.state.loading && <Spinner/>} */}
         <InfiniteScroll
           dataLength={this.state.articles.length}
           next={this.fetchMoreData}
-          hasMore={this.state.articles.length!=this.state.totalResults}
+          hasMore={this.state.articles.length!==this.state.totalResults}
           loader={<Spinner/>}
         >
         <div className="row">
@@ -110,42 +101,6 @@ export class News extends Component {
           })}
         </div>
         </InfiniteScroll>
-        {/* {!this.state.loading && <div className="row my-3">
-          {this.state.articles.map((elem) => {
-            return (
-              <div className="col-md-4" key={elem.url}>
-                <NewsItem
-                  title={elem.title.slice(0, 50)}
-                  description={!elem.description  ? elem.description  : elem.description.slice(0, 150)}
-                  imageUrl={elem.urlToImage}
-                  newsUrl={elem.url}
-                  author={!elem.author?"Unknown":elem.author}
-                  publishedDate={elem.publishedAt}
-                  source={elem.source.name}
-                />
-              </div>
-            );
-          })}
-        </div>} */}
-        <div className="container d-flex justify-content-between my-4">
-          <button
-            disabled={this.state.page <= 1}
-            className="btn btn-primary"
-            type="button"
-            onClick={this.handlePrev}
-          >
-            &larr;prev
-          </button>
-          <button
-            disabled={this.state.page> Math.ceil(this.state.totalResults) / 21}
-            className="btn btn-primary"
-            type="button"
-            onClick={this.handleNext}
-          >
-            {" "}
-            Next &rarr;
-          </button>
-        </div>
       </div>
     );
   }
