@@ -82,3 +82,9 @@ Link: https://www.npmjs.com/package/react-infinite-scroll-component
 Commmand: `npm i react-top-loading-bar`
 ---This is used to load component
 Link : https://www.npmjs.com/package/react-top-loading-bar
+
+
+## Hiding News API Key in `.env.local` file
+-Write file name using capital latter
+-- Access the file usin procees.env.FileName
+
