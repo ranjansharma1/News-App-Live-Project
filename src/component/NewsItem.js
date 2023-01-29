@@ -4,8 +4,12 @@ export class NewsItem extends Component {
   render() {
     let { title, description, imageUrl, newsUrl, author, publishedDate,source } = this.props;
     return (
-      <div className="card my-3" style={{ width: "22rem" }}>
-        <span className="position-absolute top-0  translate-middle badge rounded-pill bg-danger" style={{ left:'90%',zIndex:'1'}}>{source}</span>
+      <div className="card my-3" >
+        <div style={{display:'flex', justifyContent:'flex-end', position:'absolute', right:'0'}}>
+
+        
+        <span className=" badge rounded-pill bg-danger">{source}</span>
+        </div>
         <img
           className="card-img-top"
           style={{height: "230px" }}
@@ -31,6 +35,7 @@ export class NewsItem extends Component {
             More Details
           </a>
         </div>
+        
       </div>
     );
   }

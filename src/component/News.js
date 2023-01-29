@@ -89,7 +89,7 @@ export class News extends Component {
               <div className="col-md-4" key={elem.url}>
                 <NewsItem
                   title={elem.title.slice(0, 50)}
-                  description={!elem.description  ? elem.description  : elem.description.slice(0, 150)}
+                  description={!elem.description  ? elem.description  : elem.description.slice(0, 90)}
                   imageUrl={elem.urlToImage}
                   newsUrl={elem.url}
                   author={!elem.author?"Unknown":elem.author}
