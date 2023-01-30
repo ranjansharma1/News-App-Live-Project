@@ -30,7 +30,8 @@ const News = (props) => {
 
   //It will run after the component output has been rendered to the DOM
   useEffect(() => {
-    document.title=`${capitalizeFirstLetter(props.category)} -News article`  
+    document.title=`${capitalizeFirstLetter(props.category)} -News article` 
+    console.log("country: "+props.country);
     updateNews();
 
     // To disable warning messages for updateNews
