@@ -3,11 +3,9 @@ import React from "react";
 const NewsItem=(props)=> {
 
     return (
-      <div className="card my-3" >
-        <div style={{display:'flex', justifyContent:'flex-end', position:'absolute', right:'0'}}>
-
-        
-        <span className=" badge rounded-pill bg-danger">{props.source}</span>
+      <div className={`card my-3 text-${ props.mode === "light" ?  "dark" :"white" } bg-${ props.mode === "light" ?  "white" :"dark" }`} >
+        <div style={{display:'flex', justifyContent:'flex-end', position:'absolute', right:'0'}}>        
+          <span className=" badge rounded-pill bg-danger">{props.source}</span>
         </div>
         <img
           className="card-img-top"

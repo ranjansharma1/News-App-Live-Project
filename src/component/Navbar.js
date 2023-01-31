@@ -11,8 +11,8 @@ const Navbar = (props) => {
 
   
   return (
-    <nav className="navbar fixed-top  navbar-expand-lg bg-body-tertiary bg-warning">
-      <div className="container-fluid">
+    <nav className={`navbar fixed-top  navbar-expand-lg navbar-${props.mode} bg-${props.mode}`}  >
+      <div className="container-fluid" >
         {/* Here I am replacing a --> Link and href --> to, reason to prevent loading, after doing this browser will not reload */}
         <Link className="navbar-brand" to="/">
           Home
@@ -28,8 +28,8 @@ const Navbar = (props) => {
         >
           <span className="navbar-toggler-icon"></span>
         </button>
-        <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+        <div className="collapse navbar-collapse" id="navbarSupportedContent" >
+          <ul className="navbar-nav me-auto mb-2 mb-lg-0" >
             <li className="nav-item"><Link to="/" className="nav-link active">General</Link></li>
             <li className="nav-item"><Link to="/business" className="nav-link active">Business</Link></li>
             <li className="nav-item"><Link to="/entertainment" className="nav-link active">Entertainment</Link></li>
@@ -40,8 +40,23 @@ const Navbar = (props) => {
           </ul>
         </div>
       </div>
-      <div>
-        <select  onChange={handleChangeNavbar}>
+
+      {/* 1st way using switch button */}
+      {/* <div className={`form-check form-switch text-${ props.mode === "dark" ? "light" : "#495057" }`} >
+        <input className="form-check-input" onClick={props.toggleMode} type="checkbox" role="switch" id="dId"/>
+        <label className="form-check-label" htmlFor="flexSwitchCheckDefault">
+        <img src=".\darkmodeimage.png" className="rounded mx-auto d-block" alt="..." style={{height:"30px", width: "28px", marginTop:"5px"}} />
+        </label>
+      </div> */}
+
+      {/* 2nd way using image button */}
+      <button onClick={props.toggleMode}  style={{border:"none"}}>
+      <label className="form-check-label" htmlFor="flexSwitchCheckDefault">
+        <img src=".\darkmodeimage.png" className="rounded mx-auto d-block" alt="..." style={{height:"30px", width: "28px", marginTop:"5px"}} />
+        </label>
+      </button>
+      <div className="mx-3">
+        <select style={{backgroundColor: props.mode==="dark"?"grey":"white"}} onChange={handleChangeNavbar}>
           <option value="in">India</option>
           <option value="us">USA</option>
           <option value="gb">UK</option>
@@ -52,8 +67,11 @@ const Navbar = (props) => {
           <option value="fr">France</option>
           <option value="il">Israel</option>
         </select>
+
     </div>
     </nav>
+
+
   );
 };
 export default Navbar;

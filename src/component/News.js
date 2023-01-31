@@ -69,7 +69,7 @@ const News = (props) => {
         hasMore={articles.length !== totalResult}
         loader={<Spinner />}
       >
-        <div className="row">
+        <div className="row" >
           {articles.map((elem) => {
             return (
               <div className="col-md-4" key={elem.url}>
@@ -87,6 +87,7 @@ const News = (props) => {
                   author={!elem.author ? "Unknown" : elem.author}
                   publishedDate={elem.publishedAt}
                   source={elem.source.name}
+                  mode={props.mode}
                 />
               </div>
             );
